@@ -5,38 +5,122 @@ int btnpos2 = 2;
 int btnpos3 = 3;
 int btnpos4 = 4;
 int bntpos5 = 5;
-int vite = 0;
+int btnstart = 6;
+char = "$"
+       char = "+"
+              char = "-"
+                     int vite = 5;
+int punteggio = 0;
 int jolly = 0;
 int penality = 0;
 int record = 0;
 
 void setup() {
   // put your setup code here, to run once:
-pinMode (btnpos1, INPUT);                                                                                 
-pinMode (btnpos2, INPUT);
-pinMode (btnpos3, INPUT);
-pinMode (btnpos4, INPUT);
-pinMode (btnpos5, INPUT);
-lcd.begin (16,2);
-                                                                             // Nel gioco, nella seconda riga su 5 posizioni devono apparire a caso il simbolo
-                                                                             //Sotto a quelle 5 posizioni ci sarà un pulsante da schiacciare, come il gioco della talpa che viene fuori e 
-                                                                             //Devi battere sul pulsante, se le schiaccia avendo 5 vite iniziali va avanti, altrimenti perde una vita.
-                                                                            // Il record si calcola con il numero di volte che sei andato avanti senza finire le 5 vite
-                                                                            //Inoltre tra quelle 5 posizioni, mettere anche dei caratteri jolly che ti aumentano le vite,
-                                                                            //E dei caratteri penality che escono a rondom che però ti fanno perdere le vite
+  pinMode (btnpos1, INPUT);
+  pinMode (btnpos2, INPUT);
+  pinMode (btnpos3, INPUT);
+  pinMode (btnpos4, INPUT);
+  pinMode (btnpos5, INPUT);
+  lcd.begin (16, 2);
+  // Nel gioco, nella seconda riga su 5 posizioni devono apparire a caso il simbolo
+  //Sotto a quelle 5 posizioni ci sarà un pulsante da schiacciare, come il gioco della talpa che viene fuori e
+  //Devi battere sul pulsante, se le schiaccia avendo 5 vite iniziali va avanti, altrimenti perde una vita.
+  // Il record si calcola con il numero di volte che sei andato avanti senza finire le 5 vite
+  //Inoltre tra quelle 5 posizioni, mettere anche dei caratteri jolly che ti aumentano le vite,
+  //E dei caratteri penality che escono a rondom che però ti fanno perdere le vite
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
+  if (btnstart == HIGH)
+  {
+    Random();
 
+  }
 }
 
 void Random() {
-randomNumber = random(1,5);
-if ( )
-{
-  lcd.setCursor
-  lcd.print 
+  posizoneRandom = random (1, 5);
+  lcd.setCursor (1, posizoneRandom);
+  lcd.print = ("$");
+  lcd.setCursor (1, posioneRandom + 1);
+  lcd.print = ("+");
+  lcd.setCursor (1, posizioneRandom + 2);
+  lcd.print = ("-");
+  delay(2000);
 }
-  
- }
+
+void Bottoni() {
+  if ( posizioneRandom == 1)
+  {
+    if (digitalRead(btnpos1) == HIGH)
+    {
+      punteggio++;
+    }
+    else if (tempo < contatempo)
+    {
+      vite--;
+    }
+    {
+      else Bottoni()
+      }
+  }
+  if ( posizioneRandom == 2)
+  {
+    if (digitalRead(btnpos2) == HIGH)
+    {
+      punteggio++;
+    }
+    else if (tempo < contatempo)
+    {
+      vite--;
+    }
+{
+  else Bottoni()
+}    
+}
+  }
+  if ( posizioneRandom == 3)
+  {
+    if (digitalRead(btnpos3) == HIGH)
+    {
+      punteggio++;
+    }
+    else if (tempo < contatempo)
+    {
+      vite--;
+    }
+    {
+      else Bottoni()
+    }
+  }
+  if ( posizioneRandom == 4)
+  {
+    if (digitalRead(btnpos4) == HIGH)
+    {
+      punteggio++;
+    }
+    else if (tempo < contatempo)
+    {
+      vite--;
+    }
+  {
+    else Bottoni()
+  }  
+  }
+  if ( posizioneRandom == 5)
+  {
+    if (digitalRead(btnpos5) == HIGH)
+    {
+      punteggio++;
+    }
+    else if (tempo < contatempo)
+    {
+      vite--;
+    }
+    { 
+     else Bottoni ()
+    }
+  }
+}
