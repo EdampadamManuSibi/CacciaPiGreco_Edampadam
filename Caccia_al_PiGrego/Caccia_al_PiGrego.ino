@@ -6,10 +6,10 @@ int btnpos3 = 3;
 int btnpos4 = 4;
 int bntpos5 = 5;
 int btnstart = 6;
-char = "$"
-       char = "+"
-              char = "-"
-                     int vite = 5;
+char "$";
+char "+";
+char "-";
+int vite = 5;
 int punteggio = 0;
 int jolly = 0;
 int penality = 0;
@@ -36,22 +36,23 @@ void loop() {
   if (btnstart == HIGH)
   {
     Random();
-
-  }
+    Bottoni();
+   lcd.setCursor (0 ,1)
+   lcd.print ("Vite :" + String(vite) + " Record:" + String(record);
+  }    //I print dei simboli, vite e record stampati sulla prima riga.
 }
 
 void Random() {
-  posizoneRandom = random (1, 5);
+  posizoneRandom = random (1, 6);
   lcd.setCursor (1, posizoneRandom);
   lcd.print = ("$");
-  lcd.setCursor (1, posioneRandom + 1);
+  lcd.setCursor (1, posioneRandom );             
   lcd.print = ("+");
-  lcd.setCursor (1, posizioneRandom + 2);
-  lcd.print = ("-");
-  delay(2000);
+  lcd.setCursor (1, posizioneRandom );
+  lcd.print = ("-");  
 }
 
-void Bottoni() {
+void Bottoni() {                                                           
   if ( posizioneRandom == 1)
   {
     if (digitalRead(btnpos1) == HIGH)
@@ -123,4 +124,17 @@ void Bottoni() {
      else Bottoni ()
     }
   }
+}
+
+void CaratteriBonus() {
+ 
+}
+
+
+void Tempo() {     
+int tempo = 6000;
+
+while (digitalRead(btnpos1 || botnpos2 || btnpos3 || btnpos4 || btnpos5) == HIGH)
+{
+tempo = tempo - 300; 
 }
