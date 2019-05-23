@@ -1,16 +1,15 @@
 #include <LiquidCrystal.h>
 LiquidCrystal lcd(8,9,10,11,12,13);
 
-
 int btnpos1 = 1;
 int btnpos2 = 2;
 int btnpos3 = 3;
 int btnpos4 = 4;
 int btnpos5 = 5;
 int btnstart = 6;
-char A = "$";
-char B = "+";
-char C =  "-";
+char A = '$';
+char B = '+';
+char C = '-';
 int tempo = 1000;
 int vite = 5;
 int punteggio = 0;
@@ -33,8 +32,14 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
+  vite = 5;
+  punteggio = 0;
+  lcd.setCursor (0,0);
+  lcd.print("Vite: 5");
+  lcd.setCursor (6,0);
+  lcd.print ("Record:" + record);
   if (digitalRead (btnstart) == HIGH)
-  {
+   {
    while(vite>0);
    {
     Random(1000);
@@ -42,9 +47,19 @@ void loop() {
     CarattereBonus();
     CaratterePenality();
    }
-  }
 
-void Random(int posizioneRandom) {
+   if (punteggio >record)
+   {
+    record = punteggio;
+   }
+    lcd.setCursor(0,0);
+    lcd.print("Vite:"+ vite);
+    lcd.setCursor(6,0);
+    lcd.print("Record:"+ record);
+  }
+}
+
+void Random (int posizioneRandom) {
 int posizoneRandom = random (1, 6);
 lcd.setCursor (1, posizoneRandom);
 lcd.print ("$"|| "+" || "-");
@@ -133,14 +148,14 @@ void CarattereBonus() {
  if  ( posizioneRandom == 4 && posizioneRandom == B && digitalRead(btnpos4) == HIGH)
  {
  vite++;
- }      if  ( posizioneRandom == 5 && posizioneRandom == B && digitalRead(btnpos5) == HIGH)
+ }      
+ if  ( posizioneRandom == 5 && posizioneRandom == B && digitalRead(btnpos5) == HIGH)
  {
  vite++;
  }      
- lcd.setCursor(0,0);
- lcd.print("Vite:"+ vite);
 }
-void CaratteriPenality() {
+
+void CaratterePenality() {
   if  ( posizioneRandom == 1 && posizioneRandom == C && digitalRead(btnpos1) == HIGH)
  {
  vite--;
