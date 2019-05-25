@@ -1,21 +1,19 @@
 #include <LiquidCrystal_I2C.h>
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
-int btnpos1 = 2;
-int btnpos2 = 3;
-int btnpos3 = 4;
-int btnpos4 = 5;
-int btnpos5 = 6;
-int btnstart = 7;
-int tempo = 4000;
+int btnpos1 = 1;
+int btnpos2 = 2;
+int btnpos3 = 3;
+int btnpos4 = 4;
+int btnpos5 = 5;
+int btnstart = 6;
+int tempo = 5000;
 int vite = 5;
 int punteggio = 0;
-int jolly = 0;
-int penality = 0;
 int record = 0;
 int posizioneRandom = 0;
 int tempopassato = 0;
-int a = 0;
+int test = 0;
 
 void setup() {
   // put your setup code here, to run once:
@@ -27,8 +25,6 @@ void setup() {
   pinMode (btnstart, INPUT);
   vite = 5;
   punteggio = 0;
-  jolly = 0;
-  penality = 0;
   record = 0;
   posizioneRandom = 0;
   lcd.init();
@@ -67,7 +63,7 @@ void Random() {     //scelta posizione
   if (posizioneRandom == 1)
   {
     lcd.print("+");
-    CarattereBonus(posizioneRandom + 1);
+    CarattereBonus(posizioneRandom);
   }
   else if (posizioneRandom == 2)
   {
@@ -77,14 +73,14 @@ void Random() {     //scelta posizione
   else
   {
     lcd.print("$");
-    CaratterePigreco(posizioneRandom + 1);
+    CaratterePigreco(posizioneRandom);
   }
 }
 
-void CaratterePigreco (int pos) {    //metodo regole simbolo Pigreco
+void CaratterePigreco (int posizione) {    //metodo regole simbolo Pigreco
   while (tempopassato < tempo)
   {
-    if (digitalRead(pos) == HIGH)
+    if (digitalRead(posizione) == HIGH)
     {
       punteggio++;
       tempo = tempo - 30;
@@ -92,16 +88,16 @@ void CaratterePigreco (int pos) {    //metodo regole simbolo Pigreco
     }
     else
     {
-      for (a = 2; a < 7; a++)
+      for (test = 1; test < 6; test++)
       {
-        if (digitalRead(a) == HIGH && pos != a)
+        if (digitalRead(test) == HIGH && posizione != test)
         {
           vite--;
           tempo = tempo - 30;
           break;
         }
       }
-      if (a != 7)
+      if (test != 6)
       {
         break;
       }
@@ -116,26 +112,26 @@ void CaratterePigreco (int pos) {    //metodo regole simbolo Pigreco
   }
 }
 
-void CarattereBonus(int pos) {       //metodo regole simbolo Bonus
+void CarattereBonus(int posizione) {       //metodo regole simbolo Bonus
   while (tempopassato < tempo)
   {
-    if (digitalRead(pos) == HIGH)
+    if (digitalRead(posizione) == HIGH)
     {
       vite++;
       break;
     }
     else
     {
-      for (a = 2; a < 7; a++)
+      for (test = 1; test < 6; test++)
       {
-        if (digitalRead(a) == HIGH && pos != a)
+        if (digitalRead(test) == HIGH && posizione != test)
         {
           vite--;
           tempo = tempo - 30;
           break;
         }
       }
-      if (a != 7)
+      if (test != 6)
       {
         break;
       }
@@ -147,16 +143,16 @@ void CarattereBonus(int pos) {       //metodo regole simbolo Bonus
 void CaratterePenality () {       //metodo regole penality
   while (tempopassato < tempo)
   {
-    for (a = 2; a < 7; a++)
+    for (test = 1; test < 6; test++)
     {
-      if (digitalRead(a) == HIGH)
+      if (digitalRead(test) == HIGH)
       {
         vite--;
         tempo = tempo - 30;
         break;
       }
     }
-    if (a != 7)
+    if (test != 6)
     {
       break;
     }
