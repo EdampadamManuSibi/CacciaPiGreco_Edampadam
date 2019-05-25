@@ -1,12 +1,12 @@
 #include <LiquidCrystal_I2C.h>
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
-int btnpos1 = 1;
-int btnpos2 = 2;
-int btnpos3 = 3;
-int btnpos4 = 4;
-int btnpos5 = 5;
-int btnstart = 6;
+int btnpos1 = 2;
+int btnpos2 = 3;
+int btnpos3 = 4;
+int btnpos4 = 5;
+int btnpos5 = 6;
+int btnstart = 7;
 int tempo = 4000;
 int vite = 5;
 int punteggio = 0;
@@ -61,13 +61,13 @@ void loop() {
   }
 }
 
-void Random() {
+void Random() {     //scelta posizione
   posizioneRandom = random (1, 6);
   lcd.setCursor (1, (posizioneRandom * 3) - 1);
   if (posizioneRandom == 1)
   {
     lcd.print("+");
-    CarattereBonus(posizioneRandom);
+    CarattereBonus(posizioneRandom + 1);
   }
   else if (posizioneRandom == 2)
   {
@@ -77,11 +77,11 @@ void Random() {
   else
   {
     lcd.print("$");
-    CaratterePigreco(posizioneRandom);
+    CaratterePigreco(posizioneRandom + 1);
   }
 }
 
-void CaratterePigreco (int pos) {
+void CaratterePigreco (int pos) {    //metodo regole simbolo Pigreco
   while (tempopassato < tempo)
   {
     if (digitalRead(pos) == HIGH)
@@ -92,7 +92,7 @@ void CaratterePigreco (int pos) {
     }
     else
     {
-      for (a = 1; a < 6; a++)
+      for (a = 2; a < 7; a++)
       {
         if (digitalRead(a) == HIGH && pos != a)
         {
@@ -101,7 +101,7 @@ void CaratterePigreco (int pos) {
           break;
         }
       }
-      if (a != 6)
+      if (a != 7)
       {
         break;
       }
@@ -116,7 +116,7 @@ void CaratterePigreco (int pos) {
   }
 }
 
-void CarattereBonus(int pos) {
+void CarattereBonus(int pos) {       //metodo regole simbolo Bonus
   while (tempopassato < tempo)
   {
     if (digitalRead(pos) == HIGH)
@@ -126,7 +126,7 @@ void CarattereBonus(int pos) {
     }
     else
     {
-      for (a = 1; a < 6; a++)
+      for (a = 2; a < 7; a++)
       {
         if (digitalRead(a) == HIGH && pos != a)
         {
@@ -135,7 +135,7 @@ void CarattereBonus(int pos) {
           break;
         }
       }
-      if (a != 6)
+      if (a != 7)
       {
         break;
       }
@@ -144,10 +144,10 @@ void CarattereBonus(int pos) {
     }
   }
 }
-void CaratterePenality () {
+void CaratterePenality () {       //metodo regole penality
   while (tempopassato < tempo)
   {
-    for (a = 1; a < 6; a++)
+    for (a = 2; a < 7; a++)
     {
       if (digitalRead(a) == HIGH)
       {
@@ -156,7 +156,7 @@ void CaratterePenality () {
         break;
       }
     }
-    if (a != 6)
+    if (a != 7)
     {
       break;
     }
